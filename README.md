@@ -1,6 +1,6 @@
 # Forum PLUS — Bibliothèque des lives (site statique)
 
-Site web public qui catalogue les **210 lives Forum PLUS**. Trois façons de trouver
+Site web public qui catalogue les **218 lives Forum PLUS**. Trois façons de trouver
 un sujet : **recherche instantanée**, **navigation par thématique** (13 catégories),
 et **sommaire chronologique complet** (du plus récent au plus ancien). Chaque live a
 sa **fiche détaillée** (résumé, concepts clés, points abordés, liens entre lives).
@@ -18,7 +18,7 @@ site/
   assets/
     styles.css          ← thème (clair, épuré)
     app.js              ← logique : recherche, filtres, routeur, fiches
-    data.js             ← DONNÉES générées (les 210 lives)  ← NE PAS éditer à la main
+    data.js            ← DONNÉES générées (les 218 lives)  ← NE PAS éditer à la main
   README.md             ← ce fichier
 ../generate_site_data.py  ← génère data.js depuis les pages wiki Obsidian
 ```
@@ -43,8 +43,15 @@ Double-cliquez `index.html` → il s'ouvre dans le navigateur. C'est tout.
    `G:\Mon Drive\Obsidian Wiki\wiki\forum-plus\` (même format que les autres :
    nom de fichier `forum-plus-live-<N>-<AAAA>-<MM>-<JJ>.md`, avec `## Sujet`,
    `## Résumé`, `## Points clés`, etc.).
-2. (Optionnel mais recommandé) ajouter sa ligne dans `forum-plus-moc.md`.
-3. Régénérer les données :
+2. Régénérer le sommaire du wiki (`forum-plus-moc.md` est **généré**, ne pas
+   l'éditer à la main) :
+
+   ```powershell
+   cd "G:\Mon Drive\Claude\Forum Plus"
+   python generate_moc.py
+   ```
+
+3. Régénérer les données du site :
 
    ```powershell
    cd "G:\Mon Drive\Claude\Forum Plus"
@@ -89,10 +96,10 @@ dossier, ou `npx vercel --prod`).
   `or`, `crypto`, `pea`…). Filtre cumulable avec une thématique et une année.
 - **Thématiques** : un live peut appartenir à plusieurs catégories. On peut en
   cumuler plusieurs (chips actifs en haut de la liste).
-- **Lives « à enrichir »** : quelques lives (surtout mi-2024) n'ont pour l'instant
-  qu'une transcription brute, pas encore de fiche structurée. Ils restent listés,
-  datés et cherchables ; leur fiche affiche « Résumé détaillé à venir ». Dès qu'on
-  structure leur page wiki et qu'on relance le générateur, la fiche se remplit.
+- **Lives « à enrichir »** : il n'y en a plus. Les 218 lives ont une fiche
+  structurée (compteur `thin` à 0 dans la sortie de `generate_site_data.py`).
+  Si un live sans fiche détaillée apparaissait, il resterait listé, daté et
+  cherchable, avec la mention « Résumé détaillé à venir ».
 - **Pas de lien vidéo** pour l'instant (choix MVP). Pour ajouter les replays plus
   tard : stocker l'URL par live (ex. champ `replay:` dans le frontmatter wiki) puis
   l'exposer dans `generate_site_data.py` et `app.js`.
